@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Edmonton Live Transit</title>
+  <meta name="description" content="Every Edmonton Transit Service bus and LRT train, live on a map. Built on City of Edmonton open data." />
+  <meta property="og:title" content="Edmonton Live Transit" />
+  <meta property="og:description" content="Every ETS bus and LRT train, live on a satellite map of Edmonton." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23005087'/%3E%3Ctext x='16' y='22' font-size='16' font-family='system-ui' font-weight='700' fill='white' text-anchor='middle'%3EETS%3C/text%3E%3C/svg%3E" />
+  <link href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
+  <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+  <div id="map"></div>
+
+  <aside id="panel" class="panel">
+    <header class="panel-head">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <h1>Edmonton Live Transit</h1>
+      </div>
+      <button id="collapse" class="icon-btn" title="Collapse panel" aria-label="Collapse panel">&#x2212;</button>
+    </header>
+
+    <div class="panel-body">
+      <div class="stats">
+        <div class="stat"><span id="stat-total" class="stat-num">–</span><span class="stat-label">vehicles live</span></div>
+        <div class="stat"><span id="stat-bus" class="stat-num">–</span><span class="stat-label">buses</span></div>
+        <div class="stat"><span id="stat-lrt" class="stat-num">–</span><span class="stat-label">LRT trains</span></div>
+      </div>
+      <div id="status" class="status">Connecting to the ETS feed…</div>
+
+      <label class="field">
+        <span>Filter routes</span>
+        <input id="filter" type="text" inputmode="text" placeholder="e.g. 1, 8, Capital, 747" autocomplete="off" />
+      </label>
+
+      <div class="toggles">
+        <button id="basemap" class="chip" data-mode="sat">Satellite</button>
+        <button id="labels" class="chip on">Place labels</button>
+        <button id="trails" class="chip on">Heading arrows</button>
+        <button id="lrtlines" class="chip on">LRT lines</button>
+      </div>
+
+      <details id="alerts-box" class="alerts" hidden>
+        <summary><span id="alerts-count">0</span> service alerts</summary>
+        <ul id="alerts"></ul>
+      </details>
+
+      <footer class="credits">
+        Data: <a href="https://data.edmonton.ca/Transit/Real-Time-Vehicle-Position-GTFS-PB-File-/uyt2-vrrn" target="_blank" rel="noopener">City of Edmonton Open Data</a> (GTFS-realtime, refreshed every few seconds).
+        Imagery &copy; Esri, Maxar, Earthstar Geographics. Dark tiles &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>, &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>.
+        <a href="https://github.com/acenasir/edmonton-live-transit" target="_blank" rel="noopener" id="repo-link">Source on GitHub</a>.
+      </footer>
+    </div>
+  </aside>
+
+  <button id="expand" class="expand" hidden aria-label="Open panel">
+    <span class="brand-dot"></span><span id="expand-count">–</span>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
